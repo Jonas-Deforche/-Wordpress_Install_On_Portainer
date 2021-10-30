@@ -29,7 +29,7 @@ services:
       WORDPRESS_DB_PASSWORD: ${DB_MYSQL_PASSWORD}
       WORDPRESS_DB_NAME: ${DB_MYSQL_NAME}
     networks:
-      - ${NETWORK_NAME}
+  #    - ${NETWORK_NAME}
       - default
     labels:
       - "traefik.enable=true"
@@ -45,8 +45,8 @@ volumes:
   wordpress_data:
     name: ${SITE_NAME}_wordpress_data
 
-# Connect to existing nginx-network: `docker network create nginx-network`
-networks:
-  ${NETWORK_NAME}:
-    external:
-      name: ${NETWORK_NAME}
+# Connect to existing nginx-network: `docker network create nginx-network`#
+#networks:
+#  ${NETWORK_NAME}:
+#    external:
+#      name: ${NETWORK_NAME}
