@@ -1,7 +1,7 @@
 version: "3.4"
 
 services:
-  ${SITE_NAME}_db:
+  db:
     image: ${DB_IMAGE}:${DB_VERSION}
     volumes:
       - db_data:/var/lib/mysql
@@ -14,9 +14,9 @@ services:
     networks:
       - default
 
-  ${SITE_NAME}_wordpress:
+  wordpress:
     depends_on:
-      - ${SITE_NAME}_db
+      - db
     image: ${WP_IMAGE}:${WP_VERSION}
     volumes:
       - wordpress_data:/var/www/html
