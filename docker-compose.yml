@@ -35,7 +35,7 @@ volumes:
   db_data:
     name: ${SITE_NAME}_db_data
   wordpress_data:
-    name: ${SITE_NAME_wordpress_data}
+    name: ${SITE_NAME}_wordpress_data
 
 # Connect to existing nginx-network: `docker network create nginx-network`
 #networks:
