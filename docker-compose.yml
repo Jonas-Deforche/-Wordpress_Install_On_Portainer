@@ -4,7 +4,7 @@ services:
   ${SITE_NAME}_db:
     image: ${DB_IMAGE}:${DB_VERSION}
     volumes:
-      - ${SITE_NAME}_db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -19,7 +19,7 @@ services:
       - ${SITE_NAME}_db
     image: ${WP_IMAGE}:${WP_VERSION}
     volumes:
-      - ${SITE_NAME}_wordpress_data:/var/www/html
+      - wordpress_data:/var/www/html
     ports:
       - "8100:80"
     restart: always
@@ -32,8 +32,8 @@ services:
       - ${NETWORK_NAME}
       - default
 volumes:
-  ${SITE_NAME}_db_data: {}
-  ${SITE_NAME}_wordpress_data: {}
+  db_data: {}
+  wordpress_data: {}
 
 # Connect to existing nginx-network: `docker network create nginx-network`
 #networks:
