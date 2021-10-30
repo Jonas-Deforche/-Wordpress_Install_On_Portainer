@@ -20,8 +20,8 @@ services:
     image: ${WP_IMAGE}:${WP_VERSION}
     volumes:
       - wordpress_data:/var/www/html
-    ports:
-      - "8100:80"
+   # ports:
+   #   - "8100:80"
     restart: always
     environment:
       WORDPRESS_DB_HOST: db:3306
@@ -31,6 +31,14 @@ services:
     networks:
 #      - ${NETWORK_NAME}
       - default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-proxy-network"
+      - "traefik.http.routers.wordpress-secure.entrypoints=websecure"
+      - "traefik.http.routers.wordpress-secure.rule=Host(`${VIRTUAL_HOST}`)" 
+      - "traefik.http.routers.wordpress-secure.service=wordpress"
+      - "traefik.http.services.wordpress.loadbalancer.server.port=8100"
+
 volumes:
   db_data:
     name: ${SITE_NAME}_db_data
