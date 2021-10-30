@@ -4,7 +4,7 @@ services:
   ${SITE_NAME}_db:
     image: ${DB_IMAGE}:${DB_VERSION}
     volumes:
-      - {SITE_NAME}_db_data:/var/lib/mysql
+      - ${SITE_NAME}_db_data:/var/lib/mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
