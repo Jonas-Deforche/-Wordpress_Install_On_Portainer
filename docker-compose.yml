@@ -1,0 +1,42 @@
+version: "3.3"
+
+services:
+  ${SITE_NAME}_db:
+    image: ${DB_IMAGE}:${DB_VERSION}
+    volumes:
+      - {SITE_NAME}_db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_MYSQL_NAME}
+      MYSQL_USER: ${DB_MYSQL_USER}
+      MYSQL_PASSWORD: ${DB_MYSQL_PASSWORD}
+    networks:
+      - default
+
+  ${SITE_NAME}_wordpress:
+    depends_on:
+      - ${SITE_NAME}_db
+    image: ${WP_IMAGE}:${WP_VERSION}
+    volumes:
+      - ${SITE_NAME}_wordpress_data:/var/www/html
+    ports:
+      - "8100:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: ${DB_MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${DB_MYSQL_NAME}
+    networks:
+      - ${NETWORK_NAME}
+      - default
+volumes:
+  ${SITE_NAME}_db_data: {}
+  ${SITE_NAME}_wordpress_data: {}
+
+# Connect to existing nginx-network: `docker network create nginx-network`
+#networks:
+#  ${NETWORK_NAME}:
+#    external:
+#      name: nginx-network
