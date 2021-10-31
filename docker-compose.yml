@@ -11,8 +11,8 @@ services:
       MYSQL_DATABASE: ${DB_MYSQL_NAME}
       MYSQL_USER: ${DB_MYSQL_USER}
       MYSQL_PASSWORD: ${DB_MYSQL_PASSWORD}
-    networks:
-      - default
+  #  networks:
+  #    - default
 
   wordpress:
     depends_on:
@@ -30,9 +30,9 @@ services:
       WORDPRESS_DB_USER: ${DB_MYSQL_USER}
       WORDPRESS_DB_PASSWORD: ${DB_MYSQL_PASSWORD}
       WORDPRESS_DB_NAME: ${DB_MYSQL_NAME}
-    networks:
+  #  networks:
    #   - traefik-proxy-network
-      - default
+   #   - default
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-proxy-network"
