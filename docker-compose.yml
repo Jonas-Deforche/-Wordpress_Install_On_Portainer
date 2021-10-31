@@ -20,6 +20,7 @@ services:
     image: ${WP_IMAGE}:${WP_VERSION}
     volumes:
       - wordpress_data:/var/www/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
       - "80"
     restart: always
