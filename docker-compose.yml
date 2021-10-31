@@ -51,4 +51,4 @@ volumes:
 networks:
   traefik-proxy-network:
     external:
-#      name: ${NETWORK_NAME}
+      name: ${NETWORK_NAME}
