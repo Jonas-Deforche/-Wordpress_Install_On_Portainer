@@ -49,4 +49,4 @@ volumes:
 networks:
   ${NETWORK_NAME}:
     external:
-#      name: ${NETWORK_NAME}
+      name: ${NETWORK_NAME}
