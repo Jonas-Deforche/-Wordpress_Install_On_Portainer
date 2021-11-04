@@ -39,7 +39,7 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-proxy-network"
       - "traefik.http.routers.wordpress-secure.entrypoints=websecure"
-      - "traefik.http.routers.wordpress-secure.rule=Host(`${LINK}`)" 
+      - "traefik.http.routers.wordpress-secure.rule=Host(`${LINK}`) || Host(`${LINK2}`)"
       - "traefik.http.routers.wordpress-secure.service=wordpress"
       - "traefik.http.services.wordpress.loadbalancer.server.port=80"
 
